@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E47A3029269EAA18003C7800 /* logOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47A3028269EAA18003C7800 /* logOrientation.swift */; };
+		E4BA4A1A26E10E3700FE0F70 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BA4A1926E10E3700FE0F70 /* CloudKit.framework */; };
 		E4F25B2A269E3A9800A3A58D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F25B29269E3A9800A3A58D /* AppDelegate.swift */; };
 		E4F25B2C269E3A9800A3A58D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F25B2B269E3A9800A3A58D /* SceneDelegate.swift */; };
 		E4F25B2E269E3A9800A3A58D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F25B2D269E3A9800A3A58D /* ContentView.swift */; };
@@ -15,6 +17,12 @@
 		E4F25B36269E3A9900A3A58D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F25B34269E3A9900A3A58D /* LaunchScreen.storyboard */; };
 		E4F25B41269E3A9900A3A58D /* OrientationTrackerPhoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F25B40269E3A9900A3A58D /* OrientationTrackerPhoneTests.swift */; };
 		E4F25B4C269E3A9900A3A58D /* OrientationTrackerPhoneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F25B4B269E3A9900A3A58D /* OrientationTrackerPhoneUITests.swift */; };
+		E4F25B5A269E3AD000A3A58D /* CompassHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F25B59269E3AD000A3A58D /* CompassHeading.swift */; };
+		E4F25B6B269E7C7600A3A58D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4F25B6A269E7C7600A3A58D /* GoogleService-Info.plist */; };
+		E4F25B6C269E7C7600A3A58D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4F25B6A269E7C7600A3A58D /* GoogleService-Info.plist */; };
+		E4F25B6D269E7C7600A3A58D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4F25B6A269E7C7600A3A58D /* GoogleService-Info.plist */; };
+		E4F25BB5269E8F4E00A3A58D /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F25BB4269E8F4E00A3A58D /* Login.swift */; };
+		E4F25BB7269E903400A3A58D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F25BB6269E903400A3A58D /* Home.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +43,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E440EDBB26EAFFED00C16F3C /* OrientationTrackerPhone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrientationTrackerPhone.entitlements; sourceTree = "<group>"; };
+		E47A3028269EAA18003C7800 /* logOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logOrientation.swift; sourceTree = "<group>"; };
+		E4BA4A1726E10E3100FE0F70 /* OrientationTrackerPhoneRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrientationTrackerPhoneRelease.entitlements; sourceTree = "<group>"; };
+		E4BA4A1926E10E3700FE0F70 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		E4F25B26269E3A9800A3A58D /* OrientationTrackerPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrientationTrackerPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F25B29269E3A9800A3A58D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4F25B2B269E3A9800A3A58D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +61,10 @@
 		E4F25B47269E3A9900A3A58D /* OrientationTrackerPhoneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrientationTrackerPhoneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F25B4B269E3A9900A3A58D /* OrientationTrackerPhoneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationTrackerPhoneUITests.swift; sourceTree = "<group>"; };
 		E4F25B4D269E3A9900A3A58D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4F25B59269E3AD000A3A58D /* CompassHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassHeading.swift; sourceTree = "<group>"; };
+		E4F25B6A269E7C7600A3A58D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E4F25BB4269E8F4E00A3A58D /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		E4F25BB6269E903400A3A58D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4BA4A1A26E10E3700FE0F70 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +93,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E4BA4A1826E10E3700FE0F70 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E4BA4A1926E10E3700FE0F70 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E4F25B1D269E3A9800A3A58D = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +108,7 @@
 				E4F25B3F269E3A9900A3A58D /* OrientationTrackerPhoneTests */,
 				E4F25B4A269E3A9900A3A58D /* OrientationTrackerPhoneUITests */,
 				E4F25B27269E3A9800A3A58D /* Products */,
+				E4BA4A1826E10E3700FE0F70 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,12 +125,19 @@
 		E4F25B28269E3A9800A3A58D /* OrientationTrackerPhone */ = {
 			isa = PBXGroup;
 			children = (
+				E440EDBB26EAFFED00C16F3C /* OrientationTrackerPhone.entitlements */,
+				E4BA4A1726E10E3100FE0F70 /* OrientationTrackerPhoneRelease.entitlements */,
 				E4F25B29269E3A9800A3A58D /* AppDelegate.swift */,
 				E4F25B2B269E3A9800A3A58D /* SceneDelegate.swift */,
+				E47A3028269EAA18003C7800 /* logOrientation.swift */,
 				E4F25B2D269E3A9800A3A58D /* ContentView.swift */,
+				E4F25BB4269E8F4E00A3A58D /* Login.swift */,
+				E4F25BB6269E903400A3A58D /* Home.swift */,
+				E4F25B59269E3AD000A3A58D /* CompassHeading.swift */,
 				E4F25B2F269E3A9900A3A58D /* Assets.xcassets */,
 				E4F25B34269E3A9900A3A58D /* LaunchScreen.storyboard */,
 				E4F25B37269E3A9900A3A58D /* Info.plist */,
+				E4F25B6A269E7C7600A3A58D /* GoogleService-Info.plist */,
 				E4F25B31269E3A9900A3A58D /* Preview Content */,
 			);
 			path = OrientationTrackerPhone;
@@ -240,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4F25B36269E3A9900A3A58D /* LaunchScreen.storyboard in Resources */,
+				E4F25B6B269E7C7600A3A58D /* GoogleService-Info.plist in Resources */,
 				E4F25B33269E3A9900A3A58D /* Preview Assets.xcassets in Resources */,
 				E4F25B30269E3A9900A3A58D /* Assets.xcassets in Resources */,
 			);
@@ -249,6 +283,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4F25B6C269E7C7600A3A58D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +291,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4F25B6D269E7C7600A3A58D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +303,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4F25B2A269E3A9800A3A58D /* AppDelegate.swift in Sources */,
+				E47A3029269EAA18003C7800 /* logOrientation.swift in Sources */,
+				E4F25BB5269E8F4E00A3A58D /* Login.swift in Sources */,
+				E4F25B5A269E3AD000A3A58D /* CompassHeading.swift in Sources */,
 				E4F25B2C269E3A9800A3A58D /* SceneDelegate.swift in Sources */,
+				E4F25BB7269E903400A3A58D /* Home.swift in Sources */,
 				E4F25B2E269E3A9800A3A58D /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,10 +476,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OrientationTrackerPhone/OrientationTrackerPhone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"OrientationTrackerPhone/Preview Content\"";
+				DEVELOPMENT_TEAM = M6NJCNVBY5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OrientationTrackerPhone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -447,7 +490,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Fiona.OrientationTrackerPhone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -456,10 +499,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OrientationTrackerPhone/OrientationTrackerPhoneRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"OrientationTrackerPhone/Preview Content\"";
+				DEVELOPMENT_TEAM = M6NJCNVBY5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OrientationTrackerPhone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -467,7 +513,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Fiona.OrientationTrackerPhone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
