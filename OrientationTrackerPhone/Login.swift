@@ -59,7 +59,8 @@ struct Login: View {
 //checks if two record fields exist an correspond
 func doesRecordExist(inRecordType: String, withField: String, pswd : String, equalTo: String) -> Bool {
     var returnVal = false
-    let publicDatabase = CKContainer.default().publicCloudDatabase
+    let container = CKContainer(identifier: "iCloud.com.Fiona.OrientationTrackerPhone")
+    let publicDatabase = container.publicCloudDatabase
     let pred = NSPredicate(format: "\(withField) == %@", equalTo)
     let query = CKQuery(recordType: inRecordType, predicate: pred)
     print(query)
