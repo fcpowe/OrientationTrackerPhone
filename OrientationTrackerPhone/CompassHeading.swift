@@ -42,5 +42,6 @@ class CompassHeading: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         self.degrees = -1 * newHeading.magneticHeading
+        //look at magnetic heading vs different heading (magnetic vs true north)
     }
 }

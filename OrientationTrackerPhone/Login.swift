@@ -15,6 +15,17 @@ struct MyVariables {
     static var textKey = "Blank"
     static var username = "NA"
     static var passMessage = ""
+    static var hourReminder = 0
+    static var minuteReminder = 0
+    static var nextLog = ""
+    static var userType = 1
+    static var userKey = ""
+    static var startHour = 8
+    static var endHour = 20
+    static var dirDegreesStart = 0.0
+    static var dirDegrees = 0.0
+    static var actualDegString = ""
+    static var feedbackScreenVal = false
 }
 
 struct Login: View {
@@ -45,9 +56,14 @@ struct Login: View {
                 self.toChange = "Incorrect ID or Code"
                     }
                     else {
+                        MyVariables.userKey = username
                         //will only display briefly if at all
                         self.toChange = "Correct ID or Code"
                     }
+                getUserInfo(inRecordType: "UserInfo", withField: "userKey", equalTo: MyVariables.username)
+                if (MyVariables.userType == 1){
+                    askPermission()
+                }
             })
             {
                 Text("Login")            }.buttonStyle(GradientBackgroundStyle())        }.navigate(to: Home(), when: $willMoveToNextScreen)
@@ -77,6 +93,7 @@ func doesRecordExist(inRecordType: String, withField: String, pswd : String, equ
                                 print("incorrectPassword")
                             }
                         }
+
                     }
         
                 })
@@ -86,6 +103,7 @@ func doesRecordExist(inRecordType: String, withField: String, pswd : String, equ
     }
     return returnVal
 }
+
  
 struct Login_Previews: PreviewProvider {
     static var previews: some View {

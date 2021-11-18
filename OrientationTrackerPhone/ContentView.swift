@@ -52,7 +52,7 @@ struct Marker: Hashable {
 
 struct CompassMarkerView: View {
     let marker: Marker
-    let compassDegress: Double
+    let compassDegrees: Double
 
     var body: some View {
         VStack {
@@ -63,9 +63,9 @@ struct CompassMarkerView: View {
             Capsule()
                 .frame(width: self.capsuleWidth(),
                        height: self.capsuleHeight())
-                .foregroundColor(self.capsuleColor())
+                .foregroundColor(self.capsuleColor(dir: marker.label, feedbackScreen: MyVariables.feedbackScreenVal))
                 .padding(.bottom, 180)
-        }.rotationEffect(Angle(degrees: marker.degrees))
+        }.rotationEffect(.degrees(marker.degrees))
     }
     
         private func capsuleWidth() -> CGFloat {
@@ -76,36 +76,46 @@ struct CompassMarkerView: View {
         return self.marker.degrees == 0 ? 50 : 50
     }
 
-    private func capsuleColor() -> Color {
+    private func capsuleColor(dir: String, feedbackScreen: Bool) -> Color {
+        if (MyVariables.feedbackScreenVal) {
+            if (dir == MyVariables.actualDegString) {
+                return self.marker.degrees == 0 ? .green : .green
+            }
+            
+            if (dir == MyVariables.directionVar) {
+            return self.marker.degrees == 0 ? .blue : .blue
+            }
+        }
         return self.marker.degrees == 0 ? .gray : .gray
     }
 
     private func textAngle() -> Angle {
-        return Angle(degrees: -self.compassDegress - self.marker.degrees)
+        return Angle(degrees: -self.compassDegrees - self.marker.degrees)
     }
 }
 
 struct ContentView : View {
-    @ObservedObject var compassHeading = CompassHeading()
     @State private var willMoveToNextScreen = false
     var body: some View {
         VStack {
             Text("You chose: " +  MyVariables.directionVar)
-            Capsule()
-                .frame(width: 5,
-                       height: 50).foregroundColor(.green)
+            Text("Actual direction facing: " +  MyVariables.actualDegString)
+            
+            Image("arrowBlack").resizable()
+                .aspectRatio(contentMode: .fit).frame(height: 75 )
 
             ZStack {
                 ForEach(Marker.markers(), id: \.self) { marker in
                     CompassMarkerView(marker: marker,
-                                      compassDegress: self.compassHeading.degrees)
+                                      compassDegrees: MyVariables.dirDegrees)
                 }
             }
             .frame(width: 300,
                    height: 300)
-            .rotationEffect(Angle(degrees: self.compassHeading.degrees))
+            .rotationEffect(.degrees(MyVariables.dirDegrees))
             .statusBar(hidden: true)
             Button(action:{
+                MyVariables.feedbackScreenVal = false
                     willMoveToNextScreen = true
             } ) {
                 Text("Home")
@@ -119,33 +129,35 @@ func computeDirection(val : Double) -> String {
     case 0...22.5:
         return "N"
     case 22.5...67.5:
-        return "NW"
+        return "NE"
     case 67.5...112.5:
-        return "W"
+        return "E"
     case 112.5...157.5:
-        return "SW"
+        return "SE"
     case 157.5...202.5:
         return "S"
     case 202.5...247.5:
-        return "SE"
+        return "SW"
     case 247.5...292.5:
-        return "E"
+        return "W"
     case 292.5...337.5:
-        return "NE"
+        return "NW"
     default:
         return "N"
     }
 }
 
 //function to add record of user's direction guess vs their actual direction along with their id
-func pushToDatabase(directionGuess : String, actualDirection : String, username : String) {
+func pushToDatabase(directionGuess : String, actualDirection : String, username : String, degreesGuess: Double, degreesActualStart: Double, degreesActualEnd: Double) {
     //uses public database so all user info is in same place and can be viewed by developer
+    // var localStorage = []
     let container = CKContainer(identifier: "iCloud.com.Fiona.OrientationTrackerPhone")
     let publicDatabase = container.publicCloudDatabase
     let record = CKRecord(recordType: "DirectionGuess")
-    record.setValuesForKeys(["DirectionG": directionGuess, "ActualGuess": actualDirection, "userKey": username])
+    record.setValuesForKeys(["DirectionG": directionGuess, "ActualGuess": actualDirection, "userKey": username, "DegreesGuess": degreesGuess, "DegreesActualStart": degreesActualStart, "DegreesActual": degreesActualEnd])
     publicDatabase.save(record) { record, error in
         if let error = error {
+          //  localStorage.append([directionGuess, actualDirection, username, degreesGuess, degreesActualStart, degreesActualEnd])
             // could add error message to user, ie guess not saved, please try again later
             print("record not saved: ", error)
             return
@@ -179,7 +191,7 @@ extension View {
                     EmptyView()
                 }
             }
-        }
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 struct ContentView_Previews2: PreviewProvider {
