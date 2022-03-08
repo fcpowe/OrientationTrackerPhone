@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		E47A3029269EAA18003C7800 /* logOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47A3028269EAA18003C7800 /* logOrientation.swift */; };
-		E487C8322710BFEA00177EF2 /* OrientationTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E487C8312710BFEA00177EF2 /* OrientationTrackerApp.swift */; };
-		E487C8342710BFEA00177EF2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E487C8332710BFEA00177EF2 /* ContentView.swift */; };
-		E487C8362710BFEC00177EF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E487C8352710BFEC00177EF2 /* Assets.xcassets */; };
-		E487C8392710BFEC00177EF2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E487C8382710BFEC00177EF2 /* Preview Assets.xcassets */; };
-		E487C83B2710BFEC00177EF2 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E487C83A2710BFEC00177EF2 /* Persistence.swift */; };
-		E487C83E2710BFEC00177EF2 /* OrientationTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E487C83C2710BFEC00177EF2 /* OrientationTracker.xcdatamodeld */; };
+		E47B54072766DA2B002E31B8 /* TestCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47B54062766DA2B002E31B8 /* TestCircle.swift */; };
+		E48C26302763CDB20019ECE2 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48C262F2763CDB20019ECE2 /* Helper.swift */; };
+		E48C26322763CDD30019ECE2 /* MotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48C26312763CDD30019ECE2 /* MotherView.swift */; };
+		E48C26342763CDFF0019ECE2 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48C26332763CDFF0019ECE2 /* ViewRouter.swift */; };
+		E48C26362763D1E60019ECE2 /* OrientationAppSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48C26352763D1E60019ECE2 /* OrientationAppSwiftUI.swift */; };
+		E48C26382763F69A0019ECE2 /* StopWatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48C26372763F69A0019ECE2 /* StopWatchManager.swift */; };
 		E4BA4A1A26E10E3700FE0F70 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4BA4A1926E10E3700FE0F70 /* CloudKit.framework */; };
 		E4F25B2A269E3A9800A3A58D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F25B29269E3A9800A3A58D /* AppDelegate.swift */; };
 		E4F25B2C269E3A9800A3A58D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F25B2B269E3A9800A3A58D /* SceneDelegate.swift */; };
@@ -26,6 +26,7 @@
 		E4F25B5A269E3AD000A3A58D /* CompassHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F25B59269E3AD000A3A58D /* CompassHeading.swift */; };
 		E4F25BB5269E8F4E00A3A58D /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F25BB4269E8F4E00A3A58D /* Login.swift */; };
 		E4F25BB7269E903400A3A58D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F25BB6269E903400A3A58D /* Home.swift */; };
+		E4F736182791EF5A003D6EB3 /* Calibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F736172791EF5A003D6EB3 /* Calibrate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,17 +47,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E433C75727231EDF00909D09 /* OrientationTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrientationTracker.entitlements; sourceTree = "<group>"; };
-		E433C75827231EEA00909D09 /* OrientationTrackerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrientationTrackerRelease.entitlements; sourceTree = "<group>"; };
 		E440EDBB26EAFFED00C16F3C /* OrientationTrackerPhone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrientationTrackerPhone.entitlements; sourceTree = "<group>"; };
 		E47A3028269EAA18003C7800 /* logOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logOrientation.swift; sourceTree = "<group>"; };
+		E47B54062766DA2B002E31B8 /* TestCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCircle.swift; sourceTree = "<group>"; };
 		E487C82F2710BFEA00177EF2 /* OrientationTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrientationTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E487C8312710BFEA00177EF2 /* OrientationTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationTrackerApp.swift; sourceTree = "<group>"; };
-		E487C8332710BFEA00177EF2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		E487C8352710BFEC00177EF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E487C8382710BFEC00177EF2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		E487C83A2710BFEC00177EF2 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		E487C83D2710BFEC00177EF2 /* OrientationTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OrientationTracker.xcdatamodel; sourceTree = "<group>"; };
+		E48C262F2763CDB20019ECE2 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		E48C26312763CDD30019ECE2 /* MotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherView.swift; sourceTree = "<group>"; };
+		E48C26332763CDFF0019ECE2 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		E48C26352763D1E60019ECE2 /* OrientationAppSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationAppSwiftUI.swift; sourceTree = "<group>"; };
+		E48C26372763F69A0019ECE2 /* StopWatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchManager.swift; sourceTree = "<group>"; };
 		E4BA4A1726E10E3100FE0F70 /* OrientationTrackerPhoneRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrientationTrackerPhoneRelease.entitlements; sourceTree = "<group>"; };
 		E4BA4A1926E10E3700FE0F70 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		E4F25B26269E3A9800A3A58D /* OrientationTrackerPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrientationTrackerPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +75,7 @@
 		E4F25B59269E3AD000A3A58D /* CompassHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassHeading.swift; sourceTree = "<group>"; };
 		E4F25BB4269E8F4E00A3A58D /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		E4F25BB6269E903400A3A58D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		E4F736172791EF5A003D6EB3 /* Calibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calibrate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,29 +111,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E487C8302710BFEA00177EF2 /* OrientationTracker */ = {
-			isa = PBXGroup;
-			children = (
-				E433C75827231EEA00909D09 /* OrientationTrackerRelease.entitlements */,
-				E433C75727231EDF00909D09 /* OrientationTracker.entitlements */,
-				E487C8312710BFEA00177EF2 /* OrientationTrackerApp.swift */,
-				E487C8332710BFEA00177EF2 /* ContentView.swift */,
-				E487C8352710BFEC00177EF2 /* Assets.xcassets */,
-				E487C83A2710BFEC00177EF2 /* Persistence.swift */,
-				E487C83C2710BFEC00177EF2 /* OrientationTracker.xcdatamodeld */,
-				E487C8372710BFEC00177EF2 /* Preview Content */,
-			);
-			path = OrientationTracker;
-			sourceTree = "<group>";
-		};
-		E487C8372710BFEC00177EF2 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				E487C8382710BFEC00177EF2 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
 		E4BA4A1826E10E3700FE0F70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,7 +125,6 @@
 				E4F25B28269E3A9800A3A58D /* OrientationTrackerPhone */,
 				E4F25B3F269E3A9900A3A58D /* OrientationTrackerPhoneTests */,
 				E4F25B4A269E3A9900A3A58D /* OrientationTrackerPhoneUITests */,
-				E487C8302710BFEA00177EF2 /* OrientationTracker */,
 				E4F25B27269E3A9800A3A58D /* Products */,
 				E4BA4A1826E10E3700FE0F70 /* Frameworks */,
 			);
@@ -170,13 +146,20 @@
 			children = (
 				E440EDBB26EAFFED00C16F3C /* OrientationTrackerPhone.entitlements */,
 				E4BA4A1726E10E3100FE0F70 /* OrientationTrackerPhoneRelease.entitlements */,
+				E48C262F2763CDB20019ECE2 /* Helper.swift */,
+				E48C26312763CDD30019ECE2 /* MotherView.swift */,
 				E4F25B29269E3A9800A3A58D /* AppDelegate.swift */,
 				E4F25B2B269E3A9800A3A58D /* SceneDelegate.swift */,
+				E48C26352763D1E60019ECE2 /* OrientationAppSwiftUI.swift */,
+				E48C26372763F69A0019ECE2 /* StopWatchManager.swift */,
 				E47A3028269EAA18003C7800 /* logOrientation.swift */,
+				E47B54062766DA2B002E31B8 /* TestCircle.swift */,
 				E4F25B2D269E3A9800A3A58D /* ContentView.swift */,
 				E4F25BB4269E8F4E00A3A58D /* Login.swift */,
+				E4F736172791EF5A003D6EB3 /* Calibrate.swift */,
 				E4F25BB6269E903400A3A58D /* Home.swift */,
 				E4F25B59269E3AD000A3A58D /* CompassHeading.swift */,
+				E48C26332763CDFF0019ECE2 /* ViewRouter.swift */,
 				E4F25B2F269E3A9900A3A58D /* Assets.xcassets */,
 				E4F25B34269E3A9900A3A58D /* LaunchScreen.storyboard */,
 				E4F25B37269E3A9900A3A58D /* Info.plist */,
@@ -335,8 +318,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E487C8392710BFEC00177EF2 /* Preview Assets.xcassets in Resources */,
-				E487C8362710BFEC00177EF2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,10 +352,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E487C83B2710BFEC00177EF2 /* Persistence.swift in Sources */,
-				E487C8342710BFEA00177EF2 /* ContentView.swift in Sources */,
-				E487C8322710BFEA00177EF2 /* OrientationTrackerApp.swift in Sources */,
-				E487C83E2710BFEC00177EF2 /* OrientationTracker.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,12 +360,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4F25B2A269E3A9800A3A58D /* AppDelegate.swift in Sources */,
+				E48C26382763F69A0019ECE2 /* StopWatchManager.swift in Sources */,
 				E47A3029269EAA18003C7800 /* logOrientation.swift in Sources */,
 				E4F25BB5269E8F4E00A3A58D /* Login.swift in Sources */,
 				E4F25B5A269E3AD000A3A58D /* CompassHeading.swift in Sources */,
+				E48C26322763CDD30019ECE2 /* MotherView.swift in Sources */,
+				E47B54072766DA2B002E31B8 /* TestCircle.swift in Sources */,
+				E4F736182791EF5A003D6EB3 /* Calibrate.swift in Sources */,
+				E48C26342763CDFF0019ECE2 /* ViewRouter.swift in Sources */,
+				E48C26362763D1E60019ECE2 /* OrientationAppSwiftUI.swift in Sources */,
 				E4F25B2C269E3A9800A3A58D /* SceneDelegate.swift in Sources */,
 				E4F25BB7269E903400A3A58D /* Home.swift in Sources */,
 				E4F25B2E269E3A9800A3A58D /* ContentView.swift in Sources */,
+				E48C26302763CDB20019ECE2 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,19 +774,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		E487C83C2710BFEC00177EF2 /* OrientationTracker.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				E487C83D2710BFEC00177EF2 /* OrientationTracker.xcdatamodel */,
-			);
-			currentVersion = E487C83D2710BFEC00177EF2 /* OrientationTracker.xcdatamodel */;
-			path = OrientationTracker.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = E4F25B1E269E3A9800A3A58D /* Project object */;
 }

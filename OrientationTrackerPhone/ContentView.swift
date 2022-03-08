@@ -18,7 +18,7 @@ struct GradientBackgroundStyle: ButtonStyle {
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding()
             .foregroundColor(.white)
-            .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
+            .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.green]), startPoint: .leading, endPoint: .trailing))
             .cornerRadius(40)
             .padding(.horizontal, 20)
     }
@@ -57,8 +57,11 @@ struct CompassMarkerView: View {
     var body: some View {
         VStack {
             Text(marker.label)
-                .fontWeight(.light)
+                .fontWeight(.light).font(.system(size: 25))
                 .rotationEffect(self.textAngle())
+            //Text(marker.degreeText())
+                          //  .fontWeight(.light)
+                           // .rotationEffect(self.textAngle())
             
             Capsule()
                 .frame(width: self.capsuleWidth(),
@@ -73,17 +76,17 @@ struct CompassMarkerView: View {
     }
 
     private func capsuleHeight() -> CGFloat {
-        return self.marker.degrees == 0 ? 50 : 50
+        return self.marker.degrees == 0 ? 40 : 40
     }
 
     private func capsuleColor(dir: String, feedbackScreen: Bool) -> Color {
         if (MyVariables.feedbackScreenVal) {
-            if (dir == MyVariables.actualDegString) {
+            /*if (dir == MyVariables.actualDegString) {
                 return self.marker.degrees == 0 ? .green : .green
-            }
+            }*/
             
             if (dir == MyVariables.directionVar) {
-            return self.marker.degrees == 0 ? .blue : .blue
+            return self.marker.degrees == 0 ? .gray : .gray
             }
         }
         return self.marker.degrees == 0 ? .gray : .gray
@@ -96,76 +99,74 @@ struct CompassMarkerView: View {
 
 struct ContentView : View {
     @State private var willMoveToNextScreen = false
+    @StateObject var viewRouter: ViewRouter
     var body: some View {
         VStack {
-            Text("You chose: " +  MyVariables.directionVar)
-            Text("Actual direction facing: " +  MyVariables.actualDegString)
+            Text("Blue line points to direction you chose. Your answer is counted as correct if it is within \(Int(MyVariables.accuracy)) degrees of the actual value, indicated by the green arc.").fixedSize(horizontal: false, vertical: true).font(.system(size: 20)).padding(.horizontal, 10)
+            Text(computeAccuracy(val1: MyVariables.dirDegrees, val2:  360 - MyVariables.changeAngle)).font(.system(size: 20)).bold()
+            Text("You chose: " +  MyVariables.directionVar).font(.system(size: 20))
+            Text("Actual direction facing: " +  MyVariables.actualDegString).font(.system(size: 20))
             
             Image("arrowBlack").resizable()
                 .aspectRatio(contentMode: .fit).frame(height: 75 )
-
+           
+                
             ZStack {
+                let arcAngles = startEndAngle(angle: MyVariables.accuracy)
+               
+                Arc(startAngle: .degrees(arcAngles.1), endAngle: .degrees(arcAngles.0), clockwise: true)
+                    .stroke(.green, lineWidth: 40)
+                    .frame(width: 100, height: 100).padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+               /* if (MyVariables.directionVar == MyVariables.actualDegString) {
+                Capsule().frame(width: 5,
+                                height: 60)
+                        .foregroundColor(.blue).padding(.bottom, 125)
+                }*/
                 ForEach(Marker.markers(), id: \.self) { marker in
                     CompassMarkerView(marker: marker,
                                       compassDegrees: MyVariables.dirDegrees)
-                }
+                }  .rotationEffect(.degrees(MyVariables.dirDegrees))
+
+                Capsule()
+                    .frame(width: 7,
+                           height: 40 )
+                    .foregroundColor(.blue).padding(EdgeInsets(top: 0, leading: 20, bottom: 135, trailing: 20)).rotationEffect(.degrees(360 - MyVariables.changeAngle + MyVariables.dirDegrees))
+               
             }
             .frame(width: 300,
                    height: 300)
-            .rotationEffect(.degrees(MyVariables.dirDegrees))
+          
             .statusBar(hidden: true)
             Button(action:{
+                print("BLUE CAPSULE)")
+                print(360-MyVariables.changeAngle)
+                MyVariables.nextLog = "Please play again later"
+                var timeOnFeedback = Date().distance(to:MyVariables.startTime)
+                print("FEEDBACK")
+                print(timeOnFeedback)
                 MyVariables.feedbackScreenVal = false
-                    willMoveToNextScreen = true
+                   // willMoveToNextScreen = true
+                viewRouter.currentPage = .page2
             } ) {
-                Text("Home")
-            }.buttonStyle(GradientBackgroundStyle())        }.navigate(to: Home(), when: $willMoveToNextScreen)
+                Text("Home").font(.system(size: 30))
+            }.buttonStyle(GradientBackgroundStyle())        }.padding(.bottom, 15)
         
     }
 }
-//converts degrees direction to easily readable guess
-func computeDirection(val : Double) -> String {
-    switch abs(val) {
-    case 0...22.5:
-        return "N"
-    case 22.5...67.5:
-        return "NE"
-    case 67.5...112.5:
-        return "E"
-    case 112.5...157.5:
-        return "SE"
-    case 157.5...202.5:
-        return "S"
-    case 202.5...247.5:
-        return "SW"
-    case 247.5...292.5:
-        return "W"
-    case 292.5...337.5:
-        return "NW"
-    default:
-        return "N"
+
+struct Arc: Shape {
+    var startAngle: Angle
+    var endAngle: Angle
+    var clockwise: Bool
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.width / 2, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
+
+        return path
     }
 }
 
-//function to add record of user's direction guess vs their actual direction along with their id
-func pushToDatabase(directionGuess : String, actualDirection : String, username : String, degreesGuess: Double, degreesActualStart: Double, degreesActualEnd: Double) {
-    //uses public database so all user info is in same place and can be viewed by developer
-    // var localStorage = []
-    let container = CKContainer(identifier: "iCloud.com.Fiona.OrientationTrackerPhone")
-    let publicDatabase = container.publicCloudDatabase
-    let record = CKRecord(recordType: "DirectionGuess")
-    record.setValuesForKeys(["DirectionG": directionGuess, "ActualGuess": actualDirection, "userKey": username, "DegreesGuess": degreesGuess, "DegreesActualStart": degreesActualStart, "DegreesActual": degreesActualEnd])
-    publicDatabase.save(record) { record, error in
-        if let error = error {
-          //  localStorage.append([directionGuess, actualDirection, username, degreesGuess, degreesActualStart, degreesActualEnd])
-            // could add error message to user, ie guess not saved, please try again later
-            print("record not saved: ", error)
-            return
-        }
-    print("Record saved successfully")
-        // Record saved successfully.
-    }
-}
 
 //https://stackoverflow.com/questions/56437335/go-to-a-new-view-using-swiftui
 //code taken from above allows navigation between screens of app without navigation bar popping up
@@ -194,8 +195,34 @@ extension View {
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
+
+func startEndAngle(angle: Double) -> (angle1: Double, angle2: Double) {
+    
+    if (angle == 15){
+        return (255, 285)
+    }
+    else if (angle == 30){
+        return (240, 300)
+
+        //return (240, 300)
+        //240 300
+        //210 330
+        //270 is halfway
+    }
+    else if (angle == 45){
+        return (225, 315)
+    }
+    else if (angle == 60){
+        return (210, 330)
+    }
+    else{
+        return (240, 330)
+    }
+
+}
+
 struct ContentView_Previews2: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(viewRouter: ViewRouter())
     }
 }

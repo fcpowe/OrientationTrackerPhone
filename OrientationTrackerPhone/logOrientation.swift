@@ -14,59 +14,112 @@ struct logOrientation: View {
     @State var rotation = Double.random(in: 0...360)
     @State private var willMoveToNextScreen = false
     @ObservedObject var compassHeadLog = CompassHeading()
+    @ObservedObject var stopWatchManager = StopWatchManager()
+    @StateObject var viewRouter: ViewRouter
+
     var body: some View {
-        VStack {
-            Text("The compass is facing in a random direction, use the slider to point the compass in the direction you are facing now.").padding()
+       VStack {
+           Text("The compass is facing in a random direction. Touch and drag the compass to rotate it towards the direction you are facing now.").font(.system(size: 20)).padding(.horizontal, 10)
             Image("arrowBlack").resizable()
                 .aspectRatio(contentMode: .fit).frame(height: 75 )
-            ZStack {
-                    ForEach(Marker.markers(), id: \.self) { marker in
-                        CompassMarkerView(marker: marker,
-                                          compassDegrees: rotation)
-                    }
-            }
-                .frame(width: 300,
-                       height: 300)
-                .rotationEffect(.degrees(rotation))
-                .statusBar(hidden: true)
-            Slider(value: $rotation, in: 0...360).padding(.bottom, 25)
+           TemperatureControlView()
             Button(action:{
-                MyVariables.directionVar = computeDirection(val: 360 - rotation)
-                print(MyVariables.directionVar)
-                let direction = MyVariables.directionVar
-                MyVariables.dirDegrees = self.compassHeadLog.degrees + 15
-                print(360-rotation)
+                var timeToLog = Date().distance(to: MyVariables.startTime)
+                print("logOrientation")
+                print(timeToLog)
+                MyVariables.startTime = Date()
+                
+                MyVariables.directionVar = computeDirection(val: 360 - MyVariables.changeAngle)
+                MyVariables.dirDegrees = self.compassHeadLog.degrees //+15?
                 MyVariables.actualDegString = computeDirection(val: MyVariables.dirDegrees)
                 MyVariables.feedbackScreenVal = true
                 print(MyVariables.dirDegrees)
                 print(MyVariables.actualDegString)
                 //could maybe move this to logOrientation screen, just in case user moves right after making guess
-                pushToDatabase(directionGuess: MyVariables.directionVar, actualDirection: MyVariables.actualDegString, username: MyVariables.username, degreesGuess: 360 - rotation, degreesActualStart: MyVariables.dirDegreesStart, degreesActualEnd: MyVariables.dirDegrees)
-                        
+                pushToDatabase(directionGuess: MyVariables.directionVar, actualDirection: MyVariables.actualDegString, username: MyVariables.username, degreesGuess: 360 - MyVariables.changeAngle, degreesActualStart: MyVariables.dirDegreesStart, degreesActualEnd: MyVariables.dirDegrees, secondsToLog: timeToLog)
                  
-                willMoveToNextScreen = true
-                print(direction)
+               // willMoveToNextScreen = true
+                viewRouter.currentPage = .page4
+                print("ANGLEEEE")
+                print(360 - MyVariables.changeAngle)
+                print(computeDirection(val: 360 - MyVariables.changeAngle))
                 
             }) {
-              Text("Submit")    }.buttonStyle(GradientBackgroundStyle())         }.navigate(to: ContentView(), when: $willMoveToNextScreen)         }
+              Text("Submit").font(.system(size: 30))    }.buttonStyle(GradientBackgroundStyle())         }.padding(.top, 70)        }
 
     }
 
-func askPermission(){
-    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-        if success {
-            print("All set!")
-        } else if let error = error {
-            print(error.localizedDescription)
+//function to add record of user's direction guess vs their actual direction along with their id
+func pushToDatabase(directionGuess : String, actualDirection : String, username : String, degreesGuess: Double, degreesActualStart: Double, degreesActualEnd: Double, secondsToLog: Double ) {
+    //uses public database so all user info is in same place and can be viewed by developer
+    // var localStorage = []
+    let container = CKContainer(identifier: "iCloud.com.Fiona.OrientationTrackerPhone")
+    let publicDatabase = container.publicCloudDatabase
+    let record = CKRecord(recordType: "DirectionGuess")
+    record.setValuesForKeys(["DirectionG": directionGuess, "ActualGuess": actualDirection, "userKey": username, "DegreesGuess": degreesGuess, "DegreesActualStart": degreesActualStart, "DegreesActual": degreesActualEnd, "SecondsToLog": secondsToLog, "LoginTime": MyVariables.loginTime, "HomeTime": MyVariables.homeTime])
+    publicDatabase.save(record) { record, error in
+        if let error = error {
+          //  localStorage.append([directionGuess, actualDirection, username, degreesGuess, degreesActualStart, degreesActualEnd])
+            // could add error message to user, ie guess not saved, please try again later
+            print("record not saved: ", error)
+            return
         }
+    print("Record saved successfully")
+        // Record saved successfully.
     }
 }
 
+//converts degrees direction to easily readable guess
+func computeDirection(val : Double) -> String {
+    switch abs(val) {
+    case 0...22.5:
+        return "N"
+    case 22.5...67.5:
+        return "NE"
+    case 67.5...112.5:
+        return "E"
+    case 112.5...157.5:
+        return "SE"
+    case 157.5...202.5:
+        return "S"
+    case 202.5...247.5:
+        return "SW"
+    case 247.5...292.5:
+        return "W"
+    case 292.5...337.5:
+        return "NW"
+    default:
+        return "N"
+    }
+}
+//val1 is actual direction degrees val2 is direction guess
+func computeAccuracy(val1 : Double, val2: Double) -> String {
+    //actual direction can be negative, so abs val of that
+    //direction guess shouldn't be negative - but maybe that's a potential issue
+    let compareVal = min(abs(abs(val1)-val2), (abs(360 - abs(val1) - val2)))
+  
+    if (compareVal <= MyVariables.accuracy) {
+        return ("Within Range")
+    }
+    else {
+        return ("Out of Range")
+    }
+    /* debugging
+     print("CompareVal")
+     print(compareVal)
+     print("dir degrres")
+     print(val1)
+     print("guess")
+     print(val2)
+     print("accuracy")
+     print(MyVariables.accuracy)
 
+     */
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        logOrientation()
+        logOrientation(viewRouter: ViewRouter())
     }
 }
 
