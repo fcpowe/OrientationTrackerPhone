@@ -24,9 +24,9 @@ struct logOrientation: View {
                 .aspectRatio(contentMode: .fit).frame(height: 75 )
            TemperatureControlView()
             Button(action:{
-                var timeToLog = Date().distance(to: MyVariables.startTime)
+                MyVariables.timeToLog = Date().distance(to: MyVariables.startTime)
                 print("logOrientation")
-                print(timeToLog)
+                print(MyVariables.timeToLog)
                 MyVariables.startTime = Date()
                 
                 MyVariables.directionVar = computeDirection(val: 360 - MyVariables.changeAngle)
@@ -35,8 +35,7 @@ struct logOrientation: View {
                 MyVariables.feedbackScreenVal = true
                 print(MyVariables.dirDegrees)
                 print(MyVariables.actualDegString)
-                //could maybe move this to logOrientation screen, just in case user moves right after making guess
-                pushToDatabase(directionGuess: MyVariables.directionVar, actualDirection: MyVariables.actualDegString, username: MyVariables.username, degreesGuess: 360 - MyVariables.changeAngle, degreesActualStart: MyVariables.dirDegreesStart, degreesActualEnd: MyVariables.dirDegrees, secondsToLog: timeToLog)
+                
                  
                // willMoveToNextScreen = true
                 viewRouter.currentPage = .page4
@@ -49,25 +48,6 @@ struct logOrientation: View {
 
     }
 
-//function to add record of user's direction guess vs their actual direction along with their id
-func pushToDatabase(directionGuess : String, actualDirection : String, username : String, degreesGuess: Double, degreesActualStart: Double, degreesActualEnd: Double, secondsToLog: Double ) {
-    //uses public database so all user info is in same place and can be viewed by developer
-    // var localStorage = []
-    let container = CKContainer(identifier: "iCloud.com.Fiona.OrientationTrackerPhone")
-    let publicDatabase = container.publicCloudDatabase
-    let record = CKRecord(recordType: "DirectionGuess")
-    record.setValuesForKeys(["DirectionG": directionGuess, "ActualGuess": actualDirection, "userKey": username, "DegreesGuess": degreesGuess, "DegreesActualStart": degreesActualStart, "DegreesActual": degreesActualEnd, "SecondsToLog": secondsToLog, "LoginTime": MyVariables.loginTime, "HomeTime": MyVariables.homeTime])
-    publicDatabase.save(record) { record, error in
-        if let error = error {
-          //  localStorage.append([directionGuess, actualDirection, username, degreesGuess, degreesActualStart, degreesActualEnd])
-            // could add error message to user, ie guess not saved, please try again later
-            print("record not saved: ", error)
-            return
-        }
-    print("Record saved successfully")
-        // Record saved successfully.
-    }
-}
 
 //converts degrees direction to easily readable guess
 func computeDirection(val : Double) -> String {

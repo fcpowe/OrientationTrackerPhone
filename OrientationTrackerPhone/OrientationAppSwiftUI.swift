@@ -26,6 +26,9 @@ struct MyLinks {
     static var resultForm = "https://forms.gle/WrJTrf3GQyYaKpWA7"
     
 }
+
+
+
 func getLink(inRecordType: String, withField: String, equalTo: String)  {
     let container = CKContainer(identifier: "iCloud.com.Fiona.OrientationTrackerPhone")
     let publicDatabase = container.publicCloudDatabase

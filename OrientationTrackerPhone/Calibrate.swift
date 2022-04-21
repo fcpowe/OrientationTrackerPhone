@@ -109,7 +109,18 @@ struct Calibrate : View {
                    height: 300)
             .rotationEffect(Angle(degrees: self.compassHeading.degrees))
                 .statusBar(hidden: true)}
-            Button(action: { viewRouter.currentPage = .page3}) {
+            Button(action: { viewRouter.currentPage = .page3
+                MyVariables.calibrateTime = Date().distance(to: MyVariables.startTime)
+                print("LOGIN")
+                print(MyVariables.calibrateTime)
+                MyVariables.startTime = Date()
+                MyVariables.dirDegreesStart = self.compassHeading.degrees
+                MyVariables.calibrateEnd = MyVariables.dirDegreesStart
+                MyVariables.angleForCalibrate = MyVariables.calibrateAngle
+                var subtract = MyVariables.calibrateStart - MyVariables.calibrateEnd
+                
+                
+            }) {
                 Text("Submit").font(.system(size: 30))
             }.buttonStyle(GradientBackgroundStyle()).padding(.top, 90)
 

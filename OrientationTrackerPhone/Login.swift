@@ -31,13 +31,24 @@ struct MyVariables {
     static var startTime = Date()
     static var loginTime = 0.0
     static var homeTime = 0.0
+    static var timeToLog = 0.0
+    static var timeOnFeedback = 0.0
+    static var calibrateTime = 0.0
     static var startVal = 1
-    static var calibrateAngle = 0.0
+    static var calibrateAngle = 45.0
+    static var lastCalibrateAngle = 0.0
     static var accuracy = 30.0
     static var homeDisplay = "5 Rounds Left"
     static var logsLeft = 5
+    static var blocksLeft = 5
     static var moreLogsBool = true
     static var loginButton = true
+    static var calibrateStart = 0.0
+    static var calibrateEnd = 0.0
+    static var angleForCalibrate = 0.0
+    static var userGroupNumLogs = 15
+    static var location = ""
+
     
    
 }
@@ -89,13 +100,20 @@ struct Login: View {
                 getUserInfo(inRecordType: "UserInfo", withField: "userKey", equalTo: MyVariables.username)
                 do {sleep(1)}
                 if (MyVariables.userType == 1){
+                    MyVariables.userGroupNumLogs = 5
+                    MyVariables.logsLeft = 5
+                    MyVariables.blocksLeft = 5
                     askPermission()
-                    MyVariables.homeDisplay = "Play Round"
+                    MyVariables.moreLogsBool = true
+                    MyVariables.homeDisplay = "Start Session: \n5 Rounds Left"
                 }
                 else {
-                    MyVariables.logsLeft = 5
+                    MyVariables.userGroupNumLogs = 15
+                    MyVariables.logsLeft = 15
+                    MyVariables.blocksLeft = 2
                     MyVariables.moreLogsBool = true
-                    MyVariables.homeDisplay = String(MyVariables.logsLeft) + " Rounds Left Today"
+                    askPermission()
+                    MyVariables.homeDisplay = "Start Session: \n15 Rounds Left"
                 }
                 
                 if MyVariables.boolVal == true {
@@ -106,9 +124,9 @@ struct Login: View {
                 Text("Login") } .font(.system(size: 30))
                 .buttonStyle(GradientBackgroundStyle()).disabled(MyVariables.loginButton == false)
             Link("How do I use this app?", destination: URL(string: MyLinks.tutorial)!).padding()
-
-            
             Text("Please contact campuscompasscuse@gmail.com with any issues").multilineTextAlignment(.center).padding()
+            
+            Link("Privacy Policy", destination: URL(string: "https://sites.google.com/g.syr.edu/campuscompasscuse/home")!).padding()
             
         }
        

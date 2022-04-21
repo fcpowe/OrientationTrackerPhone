@@ -141,9 +141,9 @@ struct ContentView : View {
                 print("BLUE CAPSULE)")
                 print(360-MyVariables.changeAngle)
                 MyVariables.nextLog = "Please play again later"
-                var timeOnFeedback = Date().distance(to:MyVariables.startTime)
+                MyVariables.timeOnFeedback = Date().distance(to:MyVariables.startTime)
+                pushToDatabase(directionGuess: MyVariables.directionVar, actualDirection: MyVariables.actualDegString, username: MyVariables.username, degreesGuess: 360 - MyVariables.changeAngle, degreesActualStart: MyVariables.dirDegreesStart, degreesActualEnd: MyVariables.dirDegrees, secondsToLog: MyVariables.timeToLog)
                 print("FEEDBACK")
-                print(timeOnFeedback)
                 MyVariables.feedbackScreenVal = false
                    // willMoveToNextScreen = true
                 viewRouter.currentPage = .page2
@@ -164,6 +164,28 @@ struct Arc: Shape {
         path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.width / 2, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
 
         return path
+    }
+}
+
+//function to add record of user's direction guess vs their actual direction along with their id
+func pushToDatabase(directionGuess : String, actualDirection : String, username : String, degreesGuess: Double, degreesActualStart: Double, degreesActualEnd: Double, secondsToLog: Double ) {
+    //uses public database so all user info is in same place and can be viewed by developer
+    // var localStorage = []
+    let container = CKContainer(identifier: "iCloud.com.Fiona.OrientationTrackerPhone")
+    let publicDatabase = container.publicCloudDatabase
+    //let record = CKRecord(recordType: "DirectionGuess")
+    //record.setValuesForKeys(["DirectionG": directionGuess, "ActualGuess": actualDirection, "userKey": username, "DegreesGuess": degreesGuess, "DegreesActualStart": degreesActualStart, "DegreesActual": degreesActualEnd, "SecondsToLog": secondsToLog, "LoginTime": MyVariables.loginTime, "HomeTime": MyVariables.homeTime, "CalibrateTime": MyVariables.calibrateTime, "FeedbackTime": MyVariables.timeOnFeedback])
+    let record = CKRecord(recordType: "DirectionGuessSimple")
+    record.setValuesForKeys(["DirectionG": directionGuess, "ActualGuess": actualDirection, "userKey": username, "DegreesGuess": abs(degreesGuess), "DegreesActualStart": abs(degreesActualStart), "DegreesActual": abs(degreesActualEnd), "listOfTimes": [  abs(MyVariables.homeTime), abs(MyVariables.calibrateTime), abs(secondsToLog), abs(MyVariables.timeOnFeedback)], "Date": Date(), "LogNum": abs(MyVariables.userGroupNumLogs - MyVariables.logsLeft), "calibrateStartDegrees": abs(MyVariables.calibrateStart) ,"calibrateEndDegrees": abs(MyVariables.calibrateEnd), "calibrateAngle": abs(MyVariables.calibrateAngle), "Location": MyVariables.location])
+    publicDatabase.save(record) { record, error in
+        if let error = error {
+          //  localStorage.append([directionGuess, actualDirection, username, degreesGuess, degreesActualStart, degreesActualEnd])
+            // could add error message to user, ie guess not saved, please try again later
+            print("record not saved: ", error)
+            return
+        }
+    print("Record saved successfully")
+        // Record saved successfully.
     }
 }
 
@@ -199,10 +221,10 @@ extension View {
 func startEndAngle(angle: Double) -> (angle1: Double, angle2: Double) {
     
     if (angle == 15){
-        return (255, 285)
+        return (253, 287)
     }
     else if (angle == 30){
-        return (240, 300)
+        return (238, 302)
 
         //return (240, 300)
         //240 300
@@ -210,13 +232,13 @@ func startEndAngle(angle: Double) -> (angle1: Double, angle2: Double) {
         //270 is halfway
     }
     else if (angle == 45){
-        return (225, 315)
+        return (223, 317)
     }
     else if (angle == 60){
-        return (210, 330)
+        return (208, 332)
     }
     else{
-        return (240, 330)
+        return (238, 302)
     }
 
 }
