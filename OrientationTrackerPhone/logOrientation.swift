@@ -8,8 +8,6 @@ import Foundation
 import SwiftUI
 import CloudKit
 
-
-
 struct logOrientation: View {
     @State var rotation = Double.random(in: 0...360)
     @State private var willMoveToNextScreen = false

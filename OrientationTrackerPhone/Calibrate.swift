@@ -6,14 +6,9 @@
 //
 
 import Foundation
-
-
 import SwiftUI
 import CloudKit
 import UserNotifications
-
-import Foundation
-import SwiftUI
 
 struct Marker3: Hashable {
     let degrees: Double
